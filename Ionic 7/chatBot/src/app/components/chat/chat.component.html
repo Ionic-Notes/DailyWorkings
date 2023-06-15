@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-toolbar *ngIf="messages.length > 0">
+    <ion-title
+      >Chat with
+      {{ isSender(messages[0].sender) ? "Receiver" : "Sender" }}</ion-title
+    >
+  </ion-toolbar>
+</ion-header>
+<ion-list>
+  <ion-item *ngFor="let message of messages">
+    <ion-label [slot]="message.sender === senderId ? 'start' : 'end'">{{
+      message.message
+    }}</ion-label>
+  </ion-item>
+</ion-list>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-input
+      [(ngModel)]="newMessage"
+      placeholder="Type your message..."
+      clearInput
+    ></ion-input>
+    <ion-buttons slot="end">
+      <ion-button (click)="sendMessage()" [disabled]="!newMessage">
+        Send
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer>
